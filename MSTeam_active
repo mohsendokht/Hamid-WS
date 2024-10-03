@@ -1,0 +1,34 @@
+Clear-Host
+Echo "Toggling ScrollLock..."  
+$MyCounter = 0 
+
+$WShell = New-Object -com "Wscript.Shell" 
+
+while ($true) 
+ {
+ 
+   $WShell.sendkeys("{SCROLLLOCK}") 
+   Start-Sleep -Seconds 2   
+   $WShell.sendkeys("{SCROLLLOCK}")
+   
+   $MyCounter = 153 + $MyCounter  
+   Write-Output "Counter : $($Mycounter)"
+   
+   if ( $Mycounter -gt 3600  )
+   {
+
+       # Reset counter
+       $MyCounter = 0
+       [console]::beep(2000,500)
+       Start-Sleep -Seconds 1
+       [console]::beep(2000,500)
+
+       # Message box with custom message, OK button only, and default title and icon
+      # $WShell.Popup("It is time for a movement, You have sat on the chair for one hour.",0,"Done",0x1)
+
+   }
+   
+   Write-Output "ScrollLock  : $(Get-Date)"
+   
+   Start-Sleep -Seconds 150 
+}
